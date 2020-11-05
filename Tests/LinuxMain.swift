@@ -1,7 +1,7 @@
 import XCTest
 
-import sfsymbolsTests
+import SFSymbolicatorTests
 
 var tests = [XCTestCaseEntry]()
-tests += sfsymbolsTests.allTests()
+tests += SFSymbolicatorTests.allTests()
 XCTMain(tests)
