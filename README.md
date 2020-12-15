@@ -7,4 +7,6 @@
     </a>
 </p>
 
+Package that helps developers building Swift UI and other apps find and use the right icons in their applications.
+
 
