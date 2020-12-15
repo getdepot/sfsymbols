@@ -10,12 +10,47 @@ public struct SFSymbolicator {
         return Category.allCases
     }
     
+    public func Symbols(withStyle style: Style) -> [String] {
+        allSymbols.filter{ $0.contains(style.rawValue.lowercased()) }
+    }
+    
+    public func Symbols(withShape shape: Shape) -> [String] {
+        allSymbols.filter{ $0.contains(shape.rawValue.lowercased()) }
+    }
+    
+    public func Symbols(withStyle style: Style, withShape shape: Shape) -> [String] {
+        allSymbols.filter{ $0.contains(style.rawValue.lowercased()) }.filter{ $0.contains(shape.rawValue.lowercased()) }
+    }
+    
     public func Symbols(withCategory category: Category) -> [String] {
         category.Symbols()
     }
     
     public func Symbols(withCategory category: Category, containing: String) -> [String] {
         return category.Symbols().filter{ $0.contains(containing.lowercased()) }
+    }
+    
+    public enum Style: String, CaseIterable {
+        case Fill
+        case Crop
+        case Right
+        case Left
+        case Forward
+        case Backward
+        case Up
+        case Down
+        case Badge
+    }
+    
+    public enum Shape: String, CaseIterable {
+        case Crop
+        case Plus
+        case Minus
+        case Slash
+        case Rectangle
+        case Circle
+        case Square
+        case Arrow
     }
     
     public enum Category: String, CaseIterable {
@@ -70,7 +105,499 @@ public struct SFSymbolicator {
         }
     }
     
+    public func Symbols(containing components: [Component]) -> [String] {
+        if components.count == 0 { return [] }
+        
+        var results: [String] = allSymbols
+        
+        for search in components {
+            results = results.filter{ $0.contains(search.rawValue.lowercased()) }
+        }
+        
+        return results
+    }
     
+    public enum Component: String, CaseIterable {
+        case h
+        case bicycle
+        case display
+        case x
+        case lasso
+        case plus
+        case watchface
+        case pull
+        case gen4
+        case bullet
+        case cross
+        case tropicalstorm
+        case dotmatrix
+        case alignright
+        case braille
+        case externaldrive
+        case roundedtop
+        case captions
+        case l2
+        case paragraphsign
+        case u
+        case r2
+        case wonsign
+        case squarepath
+        case and
+        case doubledecker
+        case number
+        case l
+        case j
+        case superscript
+        case applewatch
+        case timemachine
+        case shadow
+        case bottomhalf
+        case offgrid
+        case gear
+        case dpad
+        case capslock
+        case bolt
+        case gauge
+        case greetingcard
+        case wand
+        case middle
+        case phone
+        case projective
+        case viewfinder
+        case top
+        case wave
+        case left
+        case below
+        case esim
+        case lt
+        case righttriangle
+        case gyroscope
+        case power
+        case goforward
+        case w
+        case rain
+        case sdcard
+        case bubble
+        case house
+        case cart
+        case pass
+        case leaf
+        case xserve
+        case eye
+        case d
+        case grid
+        case walk
+        case wallet
+        case horizontal
+        case path
+        case tunnel
+        case at
+        case exclamationmark
+        case slash
+        case envelope
+        case link
+        case percent
+        case hryvniasign
+        case z
+        case hands
+        case capsulepath
+        case flame
+        case clock
+        case tv
+        case clipboard
+        case nairasign
+        case pointed
+        case lessthan
+        case badge
+        case infinity
+        case lefthalf
+        case full
+        case swap
+        case nose
+        case textformat
+        case snow
+        case max
+        case creditcard
+        case playpause
+        case heart
+        case delete
+        case ellipse
+        case sunrise
+        case internaldrive
+        case music
+        case paintbrush
+        case zigzag
+        case apps
+        case b
+        case point
+        case tap
+        case person
+        case staroflife
+        case tag
+        case bag
+        case tray
+        case rupeesign
+        case l1
+        case dashed
+        case octagon
+        case zr
+        case indianrupeesign
+        case trianglepath
+        case wifi
+        case rublesign
+        case questionmark
+        case airpod
+        case tower
+        case tram
+        case rack
+        case joystick
+        case function
+        case bitcoinsign
+        case dot
+        case bin
+        case speaker
+        case trianglebadge
+        case connected
+        case roundedbottom
+        case die
+        case q
+        case increase
+        case app
+        case compact
+        case airplane
+        case smoke
+        case lirasign
+        case thermometer
+        case a
+        case shift
+        case r1
+        case mic
+        case rb
+        case sparkles
+        case counterclockwise
+        case speedometer
+        case arrowshape
+        case candybarphone
+        case stop
+        case hurricane
+        case cruzeirosign
+        case stethoscope
+        case double
+        case min
+        case ladybug
+        case location
+        case equal
+        case greaterthan
+        case squareroot
+        case shekelsign
+        case keyboard
+        case pin
+        case n
+        case aspectratio
+        case aligncenter
+        case australsign
+        case video
+        case fog
+        case square
+        case map
+        case airpodspro
+        case play
+        case cloud
+        case chevron
+        case extreme
+        case faxmachine
+        case list
+        case lock
+        case pause
+        case escape
+        case iphone
+        case arrowtriangle
+        case centsign
+        case thumbsup
+        case airpodpro
+        case radio
+        case film
+        case smiling
+        case scissors
+        case globe
+        case star
+        case control
+        case quotelevel
+        case indent
+        case bandage
+        case y
+        case scroll
+        case lb
+        case car
+        case moon
+        case justifyright
+        case m
+        case down
+        case paintpalette
+        case sleet
+        case c
+        case capsule
+        case shield
+        case halffull
+        case v
+        case server
+        case triangle
+        case paperplane
+        case wrench
+        case metronome
+        case level
+        case filters
+        case macpro
+        case stack
+        case e
+        case gen1
+        case eyebrow
+        case decrease
+        case gift
+        case headphones
+        case tuningfork
+        case florinsign
+        case stopwatch
+        case circle
+        case sum
+        case megaphone
+        case guaranisign
+        case underline
+        case hammer
+        case abc
+        case screwdriver
+        case hexagon
+        case answer
+        case cedisign
+        case righthalf
+        case zzz
+        case printer
+        case branch
+        case book
+        case pills
+        case message
+        case pc
+        case pianokeys
+        case bottom
+        case rhombus
+        case folder
+        case ticket
+        case cursor
+        case eyes
+        case thumbsdown
+        case lungs
+        case airport
+        case sterlingsign
+        case eyedropper
+        case highlighter
+        case p
+        case hail
+        case hourglass
+        case pesosign
+        case scalemass
+        case puzzlepiece
+        case briefcase
+        case gen3
+        case binoculars
+        case heavyrain
+        case figure
+        case latch
+        case flipphone
+        case rotation
+        case forward
+        case k
+        case teletype
+        case bounce
+        case rays
+        case camera
+        case snowflake
+        case sun
+        case right
+        case rotate
+        case perspective
+        case scribble
+        case waveform
+        case drop
+        case calendar
+        case tengesign
+        case antenna
+        case dial
+        case north
+        case redaction
+        case coloncurrencysign
+        case s
+        case r
+        case paperclip
+        case yensign
+        case tip
+        case gen2
+        case haze
+        case closed
+        case tugriksign
+        case out
+        case selection
+        case mustache
+        case timeline
+        case off
+        case slider
+        case landscape
+        case ipod
+        case onehanded
+        case shippingbox
+        case i
+        case alignleft
+        case connection
+        case o
+        case opticaldiscdrive
+        case size
+        case loupe
+        case turkishlirasign
+        case multiply
+        case hand
+        case plusminus
+        case minus
+        case laptopcomputer
+        case frame
+        case express
+        case crop
+        case ellipsis
+        case fill
+        case crown
+        case dollarsign
+        case larisign
+        case italic
+        case sunset
+        case homepod
+        case quote
+        case timer
+        case banknote
+        case bookmark
+        case option
+        case key
+        case giftcard
+        case flag
+        case to
+        case turn
+        case seal
+        case checkmark
+        case light
+        case rectangle
+        case zl
+        case drizzle
+        case stars
+        case ruler
+        case circlepath
+        case alarm
+        case outline
+        case clear
+        case kipsign
+        case lifepreserver
+        case t
+        case millsign
+        case text
+        case dottedunderline
+        case rosette
+        case on
+        case pencil
+        case arrow
+        case ipodshuffle
+        case network
+        case note
+        case portrait
+        case command
+        case hare
+        case alt
+        case bahtsign
+        case mappin
+        case variable
+        case trash
+        case gobackward
+        case personalhotspot
+        case record
+        case books
+        case newspaper
+        case eyeglasses
+        case eurosign
+        case gearshape
+        case textbox
+        case barometer
+        case ipad
+        case archivebox
+        case open
+        case ipodtouch
+        case rt
+        case ant
+        case justifyleft
+        case earpods
+        case divide
+        case signature
+        case scanner
+        case vertical
+        case simcard
+        case eject
+        case bus
+        case tophalf
+        case merge
+        case shuffle
+        case diamond
+        case doc
+        case strikethrough
+        case icloud
+        case hifispeaker
+        case backward
+        case magnifyingglass
+        case bell
+        case studentdesk
+        case inverse
+        case gamecontroller
+        case f
+        case ear
+        case paper
+        case bonjour
+        case uturn
+        case g
+        case tortoise
+        case manatsign
+        case umbrella
+        case lightbulb
+        case xmark
+        case francsign
+        case dust
+        case mouth
+        case clockwise
+        case wind
+        case bed
+        case dongsign
+        case pesetasign
+        case line
+        case macmini
+        case tornado
+        case hearingaid
+        case scale
+        case end
+        case clap
+        case appletv
+        case opticaldisc
+        case move
+        case homebutton
+        case comb
+        case dash
+        case deskclock
+        case oval
+        case radiowaves
+        case draw
+        case desktopcomputer
+        case bold
+        case skew
+        case airpods
+        case ecg
+        case face
+        case raised
+        case flashlight
+        case guitars
+        case justify
+        case up
+    }
     private let communications: [String] = [
         "mic",
         "mic.fill",
@@ -2363,7 +2890,1975 @@ public struct SFSymbolicator {
     ]
     
     
-    
+    private let allSymbols: [String] = [
+        "printer.dotmatrix.fill.and.paper.fill",
+        "arrow.up.circle",
+        "bubble.left.and.bubble.right",
+        "rublesign.square",
+        "7.circle.fill",
+        "crop.rotate",
+        "bolt.horizontal",
+        "dot.radiowaves.left.and.right",
+        "creditcard.circle.fill",
+        "larisign.square",
+        "paperplane.fill",
+        "exclamationmark.icloud.fill",
+        "tengesign.square.fill",
+        "hifispeaker.fill",
+        "arrow.right.circle.fill",
+        "doc.fill.badge.plus",
+        "arrow.backward.square.fill",
+        "crop",
+        "4.alt.square",
+        "05.circle.fill",
+        "arrow.uturn.right",
+        "timeline.selection",
+        "43.circle.fill",
+        "cloud.sleet.fill",
+        "a.square",
+        "text.aligncenter",
+        "coloncurrencysign.square",
+        "nairasign.circle",
+        "projective",
+        "h.square.fill",
+        "heart.circle",
+        "centsign.square.fill",
+        "01.square.fill",
+        "o.square.fill",
+        "list.bullet.indent",
+        "moon.circle.fill",
+        "bell.slash.circle",
+        "chevron.left.circle.fill",
+        "arrow.up.forward.circle.fill",
+        "6.circle.fill",
+        "hand.thumbsdown.fill",
+        "arrow.down.forward.circle",
+        "gamecontroller",
+        "camera.circle",
+        "arrow.uturn.left.square.fill",
+        "9.square",
+        "arrow.down.backward.circle.fill",
+        "23.square.fill",
+        "arrow.turn.down.left",
+        "hourglass",
+        "case",
+        "lirasign.square.fill",
+        "6.square",
+        "30.square.fill",
+        "face.smiling",
+        "function",
+        "12.square.fill",
+        "t.square",
+        "tram.circle",
+        "s.square",
+        "k.circle",
+        "coloncurrencysign.circle",
+        "chevron.right.square.fill",
+        "textformat.123",
+        "highlighter",
+        "m.circle",
+        "arrowshape.zigzag.right",
+        "24.square",
+        "bookmark",
+        "hammer.fill",
+        "phone.circle",
+        "wonsign.square.fill",
+        "l.joystick",
+        "4.alt.circle",
+        "05.square",
+        "22.circle.fill",
+        "play.fill",
+        "4.circle.fill",
+        "bolt.horizontal.circle",
+        "florinsign.square",
+        "30.circle.fill",
+        "simcard.2.fill",
+        "icloud.slash.fill",
+        "h.circle",
+        "42.square",
+        "chevron.up.square",
+        "47.square",
+        "text.justifyright",
+        "list.dash",
+        "r.rectangle.roundedbottom",
+        "video.bubble.left.fill",
+        "eyedropper.halffull",
+        "26.circle",
+        "hourglass.badge.plus",
+        "phone.fill.connection",
+        "network",
+        "pills",
+        "millsign.circle",
+        "chevron.right",
+        "2.circle",
+        "music.mic",
+        "37.circle.fill",
+        "hand.draw",
+        "03.circle.fill",
+        "19.circle",
+        "australsign.circle.fill",
+        "plus.message",
+        "envelope.arrow.triangle.branch",
+        "indianrupeesign.circle.fill",
+        "phone.down",
+        "textformat.subscript",
+        "person.crop.circle.fill.badge.minus",
+        "greetingcard",
+        "stopwatch.fill",
+        "y.square.fill",
+        "paperclip.badge.ellipsis",
+        "book.circle.fill",
+        "forward",
+        "arrowshape.turn.up.backward",
+        "r.joystick",
+        "person.fill.and.arrow.left.and.arrow.right",
+        "list.number",
+        "38.circle",
+        "41.circle.fill",
+        "42.circle",
+        "alarm",
+        "personalhotspot",
+        "book.closed",
+        "skew",
+        "sterlingsign.square.fill",
+        "tv.circle.fill",
+        "arrow.turn.left.up",
+        "i.circle.fill",
+        "gyroscope",
+        "film",
+        "arrow.up.and.person.rectangle.turn.left",
+        "folder.fill.badge.plus",
+        "c.circle.fill",
+        "forward.frame.fill",
+        "checkmark.shield.fill",
+        "envelope.badge",
+        "mouth",
+        "rectangle.dashed",
+        "tray.and.arrow.down.fill",
+        "arrow.left.and.right.circle",
+        "shield.slash",
+        "signature",
+        "cedisign.square.fill",
+        "capsule",
+        "externaldrive.badge.timemachine",
+        "i.square",
+        "bolt.slash.circle.fill",
+        "arrow.down.right.circle.fill",
+        "envelope.arrow.triangle.branch.fill",
+        "folder",
+        "icloud.circle.fill",
+        "speaker",
+        "location.slash.fill",
+        "41.square.fill",
+        "x.square",
+        "07.circle.fill",
+        "phone.down.fill",
+        "r.rectangle.roundedbottom.fill",
+        "minus.square",
+        "plusminus.circle.fill",
+        "appletv",
+        "doc.on.clipboard.fill",
+        "lock.rectangle.on.rectangle.fill",
+        "cruzeirosign.square.fill",
+        "arrowshape.turn.up.left.circle",
+        "14.circle.fill",
+        "guitars.fill",
+        "indianrupeesign.square",
+        "arrow.left.and.right.circle.fill",
+        "shuffle",
+        "r.circle.fill",
+        "latch.2.case.fill",
+        "04.circle.fill",
+        "arrow.counterclockwise",
+        "kipsign.square.fill",
+        "cloud.sleet",
+        "09.square.fill",
+        "list.bullet",
+        "arrow.up.arrow.down.square",
+        "speaker.slash",
+        "hearingaid.ear",
+        "flipphone",
+        "w.square",
+        "0.square.fill",
+        "arrow.3.trianglepath",
+        "s.circle.fill",
+        "35.square.fill",
+        "greaterthan.circle",
+        "arrow.up.left.and.arrow.down.right.circle.fill",
+        "waveform",
+        "arrowtriangle.up",
+        "lock.slash",
+        "50.circle",
+        "rectangle.fill.on.rectangle.fill.circle.fill",
+        "lock.slash.fill",
+        "kipsign.square",
+        "moon.fill",
+        "camera.badge.ellipsis",
+        "lightbulb.slash.fill",
+        "l1.rectangle.roundedbottom.fill",
+        "bitcoinsign.circle.fill",
+        "mappin.circle",
+        "shadow",
+        "2.circle.fill",
+        "arrowtriangle.right",
+        "arrow.down.right.and.arrow.up.left",
+        "link",
+        "studentdesk",
+        "l.joystick.down.fill",
+        "1.magnifyingglass",
+        "goforward.75",
+        "a.book.closed.fill",
+        "arrowtriangle.up.square.fill",
+        "15.square.fill",
+        "rublesign.circle",
+        "book.fill",
+        "09.circle.fill",
+        "folder.badge.questionmark",
+        "tray.2.fill",
+        "externaldrive.fill.badge.wifi",
+        "bitcoinsign.square.fill",
+        "calendar.badge.minus",
+        "questionmark.square",
+        "15.circle.fill",
+        "arrow.up.backward.circle.fill",
+        "21.circle.fill",
+        "arrowtriangle.right.circle.fill",
+        "flame",
+        "14.circle",
+        "face.dashed.fill",
+        "b.square.fill",
+        "ant.circle.fill",
+        "21.square.fill",
+        "iphone.homebutton.slash",
+        "link.badge.plus",
+        "apps.ipad.landscape",
+        "arrow.backward.circle.fill",
+        "stop.fill",
+        "person.crop.circle.badge.exclamationmark",
+        "lb.rectangle.roundedbottom.fill",
+        "cart.fill.badge.plus",
+        "doc.fill.badge.ellipsis",
+        "06.circle.fill",
+        "oval.portrait.fill",
+        "archivebox.circle",
+        "clear.fill",
+        "pencil.tip",
+        "display.trianglebadge.exclamationmark",
+        "arrow.down.left.video.fill",
+        "plus.magnifyingglass",
+        "bubble.left",
+        "19.square.fill",
+        "multiply.circle.fill",
+        "bicycle",
+        "08.square",
+        "10.square.fill",
+        "lessthan.circle",
+        "rhombus",
+        "v.square",
+        "arrow.up.left.square",
+        "eyes",
+        "32.circle",
+        "14.square",
+        "9.circle.fill",
+        "gobackward.10",
+        "triangle.circle.fill",
+        "bus",
+        "24.square.fill",
+        "cloud.rain",
+        "arrowtriangle.left.square",
+        "number",
+        "hand.point.down",
+        "6.square.fill",
+        "homepod",
+        "umbrella",
+        "10.circle.fill",
+        "airplane.circle",
+        "hands.sparkles.fill",
+        "loupe",
+        "text.justify",
+        "z.square.fill",
+        "chevron.compact.up",
+        "creditcard",
+        "xmark.bin",
+        "externaldrive.fill",
+        "z.circle.fill",
+        "hand.point.right.fill",
+        "person.crop.circle.fill.badge.checkmark",
+        "calendar.badge.clock",
+        "lessthan.circle.fill",
+        "cloud.sun",
+        "puzzlepiece.fill",
+        "29.circle.fill",
+        "icloud.and.arrow.up",
+        "figure.walk",
+        "l2.rectangle.roundedtop",
+        "cloud.sun.rain",
+        "icloud.and.arrow.down.fill",
+        "envelope.fill",
+        "lock.rotation",
+        "paperclip.circle",
+        "47.circle.fill",
+        "goforward.60",
+        "rectangle.3.offgrid.bubble.left.fill",
+        "bubble.right",
+        "arrow.up.arrow.down.square.fill",
+        "arrow.left.arrow.right.circle.fill",
+        "pencil.tip.crop.circle.badge.minus",
+        "8.circle.fill",
+        "47.circle",
+        "flag.fill",
+        "externaldrive.fill.badge.checkmark",
+        "flag.slash.fill",
+        "video.slash.fill",
+        "face.dashed",
+        "arrow.up.and.down.circle",
+        "printer.dotmatrix",
+        "xmark.bin.fill",
+        "ladybug",
+        "appletv.fill",
+        "bolt.slash.fill",
+        "bitcoinsign.square",
+        "arrow.uturn.forward.square",
+        "shield.slash.fill",
+        "lirasign.circle.fill",
+        "backward.fill",
+        "chevron.compact.left",
+        "a.square.fill",
+        "bag.badge.plus",
+        "cloud.snow.fill",
+        "9.circle",
+        "square.fill",
+        "cruzeirosign.circle.fill",
+        "arrow.up",
+        "arrow.triangle.turn.up.right.diamond.fill",
+        "metronome",
+        "01.square",
+        "person.3",
+        "arrow.uturn.up.square",
+        "clear",
+        "j.square",
+        "arrow.uturn.up",
+        "aspectratio.fill",
+        "person.crop.circle",
+        "49.circle",
+        "n.square.fill",
+        "arrow.uturn.backward.circle.badge.ellipsis",
+        "05.square.fill",
+        "control",
+        "forward.end.fill",
+        "circle.dashed",
+        "flag.circle.fill",
+        "gearshape",
+        "greetingcard.fill",
+        "mic",
+        "phone",
+        "person.crop.circle.fill.badge.questionmark",
+        "bolt.circle.fill",
+        "shekelsign.circle",
+        "externaldrive.connected.to.line.below.fill",
+        "pianokeys.inverse",
+        "l2.rectangle.roundedtop.fill",
+        "hurricane",
+        "lt.rectangle.roundedtop.fill",
+        "00.circle.fill",
+        "exclamationmark.bubble.fill",
+        "sterlingsign.circle.fill",
+        "arrow.clockwise.circle.fill",
+        "laptopcomputer",
+        "arrow.down.right.and.arrow.up.left.circle",
+        "pencil",
+        "bolt",
+        "puzzlepiece",
+        "opticaldisc",
+        "x.circle.fill",
+        "gearshape.2",
+        "eye",
+        "externaldrive",
+        "eurosign.circle.fill",
+        "person.and.arrow.left.and.arrow.right",
+        "pencil.and.outline",
+        "sun.dust.fill",
+        "binoculars.fill",
+        "car.circle",
+        "metronome.fill",
+        "car.2.fill",
+        "scribble",
+        "arrow.up.forward.square.fill",
+        "hare",
+        "lock.shield.fill",
+        "return",
+        "tray.full.fill",
+        "n.circle.fill",
+        "38.square.fill",
+        "ipad",
+        "trash",
+        "ipodshuffle.gen4",
+        "arrow.down.forward.square.fill",
+        "f.square",
+        "1.circle",
+        "rectangle.fill.on.rectangle.fill.circle",
+        "arrow.uturn.down.circle.fill",
+        "level.fill",
+        "capsule.portrait",
+        "l.joystick.down",
+        "n.square",
+        "macpro.gen1",
+        "wand.and.stars.inverse",
+        "9.alt.circle",
+        "q.square.fill",
+        "40.circle.fill",
+        "sunrise",
+        "rupeesign.square.fill",
+        "envelope.open",
+        "icloud.and.arrow.up.fill",
+        "delete.left.fill",
+        "pesetasign.square.fill",
+        "house",
+        "person.2.square.stack",
+        "cart.fill.badge.minus",
+        "j.circle.fill",
+        "speaker.slash.circle.fill",
+        "tram.fill",
+        "greaterthan.circle.fill",
+        "sunset",
+        "internaldrive",
+        "arrowtriangle.left.circle.fill",
+        "key.icloud.fill",
+        "p.circle",
+        "arrowtriangle.left.circle",
+        "manatsign.square",
+        "n.circle",
+        "bubble.right.fill",
+        "31.circle.fill",
+        "arrow.forward.square.fill",
+        "light.min",
+        "slider.horizontal.below.square.fill.and.square",
+        "pause",
+        "deskclock",
+        "hand.point.left.fill",
+        "o.circle",
+        "chevron.right.circle",
+        "mic.slash.fill",
+        "chevron.left.square.fill",
+        "arrow.triangle.swap",
+        "l.square.fill",
+        "39.square.fill",
+        "italic",
+        "antenna.radiowaves.left.and.right",
+        "arrow.uturn.down.square.fill",
+        "circle.circle.fill",
+        "bell.circle.fill",
+        "arrowtriangle.left",
+        "repeat",
+        "tengesign.circle",
+        "banknote.fill",
+        "divide.square.fill",
+        "arrowshape.bounce.right",
+        "cloud.rain.fill",
+        "message.fill",
+        "dollarsign.square.fill",
+        "arrow.down.left.circle.fill",
+        "rectangle.and.pencil.and.ellipsis",
+        "16.square.fill",
+        "key",
+        "cruzeirosign.circle",
+        "arrow.uturn.left",
+        "strikethrough",
+        "47.square.fill",
+        "camera.circle.fill",
+        "opticaldiscdrive.fill",
+        "circle.grid.cross.left.fill",
+        "arrow.up.message",
+        "mouth.fill",
+        "video.bubble.left",
+        "arrow.up.and.down",
+        "speaker.zzz",
+        "pause.circle.fill",
+        "15.square",
+        "thermometer",
+        "chevron.down.circle",
+        "k.square",
+        "cross.case",
+        "arrow.forward.circle.fill",
+        "speedometer",
+        "figure.wave",
+        "waveform.path.ecg",
+        "triangle.circle",
+        "play.slash.fill",
+        "heart",
+        "ipodshuffle.gen2",
+        "hand.raised.slash",
+        "gift.circle",
+        "hryvniasign.circle.fill",
+        "light.max",
+        "tag.slash.fill",
+        "speaker.wave.2.circle",
+        "hammer",
+        "archivebox.circle.fill",
+        "rublesign.circle.fill",
+        "macmini.fill",
+        "icloud.fill",
+        "arrow.up.left.and.down.right.and.arrow.up.right.and.down.left",
+        "car.2",
+        "g.circle",
+        "guaranisign.circle",
+        "pencil.circle",
+        "k.square.fill",
+        "paintbrush",
+        "bicycle.circle",
+        "arrow.down.square",
+        "00.square.fill",
+        "phone.bubble.left",
+        "note.text",
+        "pin.circle",
+        "arrow.up.arrow.down.circle.fill",
+        "rectangle.stack.person.crop",
+        "gobackward.minus",
+        "arrow.left.arrow.right.square.fill",
+        "ruler.fill",
+        "externaldrive.fill.badge.xmark",
+        "arrow.counterclockwise.icloud",
+        "wand.and.rays",
+        "bold.italic.underline",
+        "arrow.up.circle.fill",
+        "45.circle",
+        "backward.end.alt.fill",
+        "text.justifyleft",
+        "stopwatch",
+        "staroflife.circle.fill",
+        "captions.bubble",
+        "doc.circle",
+        "die.face.3.fill",
+        "46.square",
+        "bag",
+        "location.circle",
+        "guaranisign.circle.fill",
+        "46.circle.fill",
+        "s.square.fill",
+        "goforward",
+        "delete.right",
+        "arrow.left.circle",
+        "tv.circle",
+        "bell.circle",
+        "lock.rectangle.fill",
+        "text.alignright",
+        "07.square",
+        "arrowtriangle.down.square.fill",
+        "wave.3.left",
+        "1.circle.fill",
+        "arrow.clockwise.icloud",
+        "perspective",
+        "37.square",
+        "eject",
+        "15.circle",
+        "faxmachine",
+        "hifispeaker",
+        "t.circle.fill",
+        "cloud.moon.rain",
+        "hand.wave.fill",
+        "megaphone",
+        "gobackward",
+        "greaterthan.square",
+        "dollarsign.circle.fill",
+        "crown",
+        "arrow.up.and.down.and.arrow.left.and.right",
+        "cloud.heavyrain",
+        "pesetasign.square",
+        "link.circle.fill",
+        "minus.magnifyingglass",
+        "pause.rectangle.fill",
+        "02.square.fill",
+        "textformat.alt",
+        "09.circle",
+        "arrow.left.and.right.square.fill",
+        "airpods",
+        "tropicalstorm",
+        "macpro.gen3.server",
+        "lirasign.square",
+        "drop.triangle",
+        "m.circle.fill",
+        "rectangle.stack.person.crop.fill",
+        "record.circle",
+        "rb.rectangle.roundedbottom.fill",
+        "flag.slash",
+        "person.2.circle.fill",
+        "crown.fill",
+        "lirasign.circle",
+        "39.square",
+        "r2.rectangle.roundedtop",
+        "rotate.left",
+        "dot.radiowaves.right",
+        "arrow.down.doc",
+        "die.face.3",
+        "3.circle.fill",
+        "arrow.down.left.square.fill",
+        "trash.slash",
+        "applewatch.watchface",
+        "person",
+        "paperplane.circle",
+        "arrow.right.square",
+        "display",
+        "c.square.fill",
+        "27.circle",
+        "flag.slash.circle",
+        "apps.iphone",
+        "5.square.fill",
+        "bubble.left.fill",
+        "01.circle",
+        "drop.triangle.fill",
+        "simcard.2",
+        "arrow.uturn.up.square.fill",
+        "bitcoinsign.circle",
+        "equal.circle",
+        "arrow.down.backward.square",
+        "newspaper.fill",
+        "square.circle.fill",
+        "externaldrive.connected.to.line.below",
+        "lock.rectangle.on.rectangle",
+        "shekelsign.square.fill",
+        "43.square.fill",
+        "arrow.up.doc.fill",
+        "hand.point.up.braille.fill",
+        "arrowshape.turn.up.right.circle",
+        "m.square.fill",
+        "forward.fill",
+        "chevron.left.2",
+        "sunrise.fill",
+        "flashlight.on.fill",
+        "arrowshape.turn.up.right.circle.fill",
+        "r1.rectangle.roundedbottom.fill",
+        "magnifyingglass.circle",
+        "k.circle.fill",
+        "z.circle",
+        "slider.vertical.3",
+        "cruzeirosign.square",
+        "arrow.down.circle.fill",
+        "cloud.hail.fill",
+        "arrowtriangle.down.circle.fill",
+        "person.3.fill",
+        "tray.fill",
+        "lock.fill",
+        "rotate.3d",
+        "18.circle",
+        "arrow.left.square.fill",
+        "sun.haze",
+        "rectangle.fill",
+        "phone.circle.fill",
+        "arrow.down.left",
+        "bus.doubledecker",
+        "cross.fill",
+        "arrow.forward.circle",
+        "bell.fill",
+        "smoke.fill",
+        "chevron.up.circle.fill",
+        "dpad",
+        "11.circle",
+        "text.cursor",
+        "cloud.moon.fill",
+        "pesosign.circle.fill",
+        "arrowshape.turn.up.left.2.circle.fill",
+        "arrow.left.and.right.square",
+        "person.fill.xmark",
+        "tag.circle.fill",
+        "pills.fill",
+        "hryvniasign.square",
+        "05.circle",
+        "arrow.up.backward.and.arrow.down.forward.circle",
+        "pause.rectangle",
+        "folder.fill.badge.minus",
+        "arrow.uturn.right.circle.fill",
+        "snow",
+        "arrow.down.forward.circle.fill",
+        "manatsign.circle.fill",
+        "bolt.car",
+        "australsign.square",
+        "externaldrive.fill.badge.person.crop",
+        "gobackward.60",
+        "50.square.fill",
+        "u.square.fill",
+        "book.closed.fill",
+        "phone.connection",
+        "florinsign.circle.fill",
+        "arrow.up.backward",
+        "plus",
+        "18.square.fill",
+        "circle.grid.cross.right.fill",
+        "equal",
+        "sterlingsign.square",
+        "trash.circle.fill",
+        "p.square.fill",
+        "person.fill.checkmark",
+        "arrowshape.turn.up.backward.2",
+        "49.circle.fill",
+        "plus.bubble",
+        "arrow.down",
+        "cart",
+        "car",
+        "questionmark.video",
+        "06.square.fill",
+        "lock.square.stack",
+        "turkishlirasign.circle.fill",
+        "6.alt.square",
+        "lifepreserver",
+        "tray",
+        "arrow.left.and.right.righttriangle.left.righttriangle.right",
+        "arrow.left.arrow.right.square",
+        "28.circle",
+        "hand.thumbsup",
+        "list.triangle",
+        "case.fill",
+        "circle.grid.cross.fill",
+        "hifispeaker.2.fill",
+        "indianrupeesign.square.fill",
+        "w.circle.fill",
+        "cloud.bolt.fill",
+        "text.bubble.fill",
+        "bolt.horizontal.icloud",
+        "rotate.right.fill",
+        "wifi",
+        "phone.badge.plus",
+        "hourglass.tophalf.fill",
+        "20.square",
+        "phone.fill.arrow.down.left",
+        "04.square",
+        "doc.on.doc",
+        "airplane",
+        "centsign.square",
+        "rectangle.roundedtop",
+        "hand.point.up.fill",
+        "tray.2",
+        "bell.badge",
+        "arrow.up.backward.circle",
+        "arrow.left",
+        "b.circle.fill",
+        "cloud.bolt.rain",
+        "plus.rectangle.fill.on.folder.fill",
+        "chevron.down.square",
+        "arrow.up.doc.on.clipboard",
+        "person.fill.badge.minus",
+        "6.circle",
+        "arrowtriangle.left.fill",
+        "infinity",
+        "cross.case.fill",
+        "18.square",
+        "location.fill",
+        "7.circle",
+        "circle.grid.cross.down.fill",
+        "cross.circle.fill",
+        "link.circle",
+        "stop.circle",
+        "scalemass.fill",
+        "17.square",
+        "rupeesign.circle.fill",
+        "homepod.2",
+        "phone.fill.arrow.up.right",
+        "person.crop.square.fill.and.at.rectangle",
+        "arrow.down.to.line.alt",
+        "lock.rectangle",
+        "book",
+        "scalemass",
+        "comb",
+        "capslock",
+        "ticket.fill",
+        "decrease.quotelevel",
+        "arrow.counterclockwise.circle",
+        "list.star",
+        "wonsign.square",
+        "27.square",
+        "goforward.30",
+        "lightbulb.fill",
+        "exclamationmark.square",
+        "pesosign.square.fill",
+        "ruler",
+        "camera.viewfinder",
+        "lock.rectangle.stack",
+        "sparkles",
+        "4.alt.square.fill",
+        "speaker.wave.2.fill",
+        "airplane.circle.fill",
+        "22.circle",
+        "bag.badge.minus",
+        "46.square.fill",
+        "doc.fill",
+        "arrowtriangle.up.fill",
+        "bolt.horizontal.circle.fill",
+        "eject.fill",
+        "key.icloud",
+        "rectangle.stack.fill.badge.person.crop",
+        "wifi.exclamationmark",
+        "video.fill",
+        "arrowshape.bounce.forward",
+        "46.circle",
+        "pencil.circle.fill",
+        "scissors",
+        "xmark",
+        "sun.haze.fill",
+        "clock",
+        "tugriksign.circle.fill",
+        "circle.grid.cross",
+        "5.circle.fill",
+        "07.square.fill",
+        "arrow.left.to.line.alt",
+        "circle.fill.square.fill",
+        "lock.doc",
+        "08.circle.fill",
+        "equal.circle.fill",
+        "figure.walk.diamond.fill",
+        "sun.min",
+        "03.square",
+        "arrow.triangle.turn.up.right.diamond",
+        "speaker.wave.1.fill",
+        "arrowtriangle.left.fill.and.line.vertical.and.arrowtriangle.right.fill",
+        "bell.slash.fill",
+        "house.fill",
+        "captions.bubble.fill",
+        "arrow.right.to.line",
+        "gauge.badge.minus",
+        "externaldrive.badge.wifi",
+        "lock",
+        "note.text.badge.plus",
+        "29.square",
+        "arrow.down.square.fill",
+        "megaphone.fill",
+        "rotate.right",
+        "31.square",
+        "externaldrive.fill.badge.plus",
+        "person.crop.square",
+        "figure.walk.circle",
+        "camera",
+        "33.circle",
+        "arrow.down.left.circle",
+        "exclamationmark.shield",
+        "ticket",
+        "circle.square",
+        "hand.raised.fill",
+        "gift.circle.fill",
+        "line.horizontal.3.circle",
+        "die.face.4.fill",
+        "hand.point.up.left",
+        "arrow.down.to.line",
+        "plus.message.fill",
+        "globe",
+        "person.crop.circle.badge.plus",
+        "49.square.fill",
+        "person.fill.questionmark",
+        "person.crop.circle.fill.badge.exclamationmark",
+        "speaker.wave.1",
+        "dollarsign.square",
+        "f.square.fill",
+        "8.square.fill",
+        "tray.circle",
+        "arrow.uturn.down.circle",
+        "message",
+        "rublesign.square.fill",
+        "arrowshape.turn.up.backward.circle.fill",
+        "eyebrow",
+        "arrow.up.right.circle",
+        "hourglass.bottomhalf.fill",
+        "plus.slash.minus",
+        "ant.circle",
+        "externaldrive.fill.badge.minus",
+        "person.crop.circle.fill.badge.plus",
+        "rectangle.roundedtop.fill",
+        "person.crop.circle.fill.badge.xmark",
+        "chevron.left.circle",
+        "paintbrush.fill",
+        "greaterthan.square.fill",
+        "opticaldiscdrive",
+        "tram",
+        "lightbulb.slash",
+        "34.square",
+        "drop",
+        "line.horizontal.3.circle.fill",
+        "books.vertical.fill",
+        "sun.max.fill",
+        "xmark.bin.circle",
+        "bed.double.fill",
+        "40.circle",
+        "arrow.up.right.video",
+        "envelope.circle",
+        "latch.2.case",
+        "06.circle",
+        "28.square.fill",
+        "figure.walk.diamond",
+        "magnifyingglass",
+        "tag",
+        "rosette",
+        "chevron.up.circle",
+        "applewatch.slash",
+        "rupeesign.square",
+        "arrow.up.arrow.down",
+        "person.badge.plus",
+        "arrow.triangle.turn.up.right.circle.fill",
+        "rectangle.and.paperclip",
+        "z.square",
+        "dongsign.circle.fill",
+        "pause.fill",
+        "folder.fill.badge.person.crop",
+        "gear",
+        "thermometer.sun.fill",
+        "clock.arrow.circlepath",
+        "video.badge.checkmark",
+        "u.circle",
+        "underline",
+        "arrowshape.zigzag.forward",
+        "increase.quotelevel",
+        "cloud.bolt",
+        "bag.fill",
+        "16.circle.fill",
+        "y.square",
+        "26.square.fill",
+        "43.circle",
+        "43.square",
+        "bubble.middle.bottom.fill",
+        "multiply.square",
+        "cloud.sun.rain.fill",
+        "lock.rotation.open",
+        "g.square.fill",
+        "33.square",
+        "j.square.fill",
+        "divide.circle",
+        "paintbrush.pointed",
+        "car.circle.fill",
+        "8.circle",
+        "39.circle.fill",
+        "34.circle",
+        "doc.badge.gearshape.fill",
+        "i.circle",
+        "cloud.sun.bolt.fill",
+        "dial.max.fill",
+        "goforward.10",
+        "lock.open",
+        "bookmark.slash.fill",
+        "03.circle",
+        "folder.circle.fill",
+        "24.circle",
+        "arrowshape.turn.up.backward.fill",
+        "textformat.size",
+        "cloud.moon.bolt",
+        "externaldrive.badge.checkmark",
+        "rt.rectangle.roundedtop",
+        "bubble.middle.bottom",
+        "arrow.up.to.line.alt",
+        "phone.down.circle.fill",
+        "lock.shield",
+        "arrow.triangle.pull",
+        "lasso.sparkles",
+        "wonsign.circle",
+        "paperclip.circle.fill",
+        "t.circle",
+        "ant.fill",
+        "arrow.left.and.right",
+        "25.square.fill",
+        "play.rectangle",
+        "pin.circle.fill",
+        "rb.rectangle.roundedbottom",
+        "checkmark.shield",
+        "textformat.abc.dottedunderline",
+        "teletype.circle.fill",
+        "lifepreserver.fill",
+        "exclamationmark.arrow.triangle.2.circlepath",
+        "millsign.square",
+        "nose",
+        "ear.fill",
+        "triangle.fill",
+        "cloud.drizzle.fill",
+        "plusminus.circle",
+        "doc.badge.plus",
+        "07.circle",
+        "03.square.fill",
+        "shield.fill",
+        "speaker.slash.fill",
+        "dpad.left.fill",
+        "arrow.left.circle.fill",
+        "arrow.uturn.up.circle",
+        "externaldrive.badge.person.crop",
+        "32.square",
+        "gobackward.30",
+        "ipodshuffle.gen3",
+        "cloud.moon.rain.fill",
+        "exclamationmark.circle.fill",
+        "arrowtriangle.right.square",
+        "mappin.and.ellipse",
+        "mustache.fill",
+        "chevron.down.square.fill",
+        "oval.fill",
+        "capslock.fill",
+        "moon",
+        "40.square",
+        "r.circle",
+        "square.grid.3x1.folder.badge.plus",
+        "13.square",
+        "h.square",
+        "36.circle.fill",
+        "tray.and.arrow.up.fill",
+        "arrow.clockwise",
+        "francsign.circle",
+        "trash.slash.fill",
+        "arrow.uturn.backward.circle.fill",
+        "keyboard.chevron.compact.down",
+        "backward",
+        "o.square",
+        "19.circle.fill",
+        "lessthan.square",
+        "arrow.uturn.left.circle.fill",
+        "gamecontroller.fill",
+        "person.2.square.stack.fill",
+        "externaldrive.fill.badge.timemachine",
+        "21.square",
+        "calendar.circle",
+        "pin.slash.fill",
+        "44.circle",
+        "folder.fill.badge.gear",
+        "archivebox",
+        "person.icloud.fill",
+        "creditcard.circle",
+        "x.squareroot",
+        "w.square.fill",
+        "xmark.bin.circle.fill",
+        "rectangle.3.offgrid.bubble.left",
+        "level",
+        "staroflife",
+        "arrow.up.and.down.circle.fill",
+        "teletype.answer",
+        "arrow.uturn.forward.circle",
+        "zl.rectangle.roundedtop.fill",
+        "pencil.tip.crop.circle.badge.plus",
+        "16.circle",
+        "playpause.fill",
+        "airport.extreme",
+        "abc",
+        "doc",
+        "camera.on.rectangle.fill",
+        "shift.fill",
+        "link.icloud.fill",
+        "eye.circle.fill",
+        "checkmark.icloud.fill",
+        "headphones.circle.fill",
+        "hand.thumbsdown",
+        "message.circle.fill",
+        "arrowshape.turn.up.backward.2.circle",
+        "larisign.circle",
+        "arrow.uturn.up.circle.fill",
+        "r2.rectangle.roundedtop.fill",
+        "arrow.down.right.square",
+        "18.circle.fill",
+        "arrow.left.arrow.right",
+        "play.circle.fill",
+        "leaf",
+        "phone.arrow.right",
+        "cross",
+        "arrow.up.left.square.fill",
+        "airpodpro.right",
+        "arrow.uturn.down",
+        "wrench",
+        "gobackward.75",
+        "tag.fill",
+        "chevron.right.circle.fill",
+        "e.square.fill",
+        "37.square.fill",
+        "bolt.horizontal.fill",
+        "icloud.and.arrow.down",
+        "turkishlirasign.square.fill",
+        "arrow.down.right.circle",
+        "die.face.2.fill",
+        "plus.rectangle.on.folder",
+        "arrow.up.and.down.righttriangle.up.righttriangle.down",
+        "e.circle",
+        "plus.square.fill",
+        "paintpalette",
+        "iphone.homebutton.radiowaves.left.and.right",
+        "speaker.wave.2",
+        "b.square",
+        "27.square.fill",
+        "9.alt.square.fill",
+        "pesosign.square",
+        "location.north.line.fill",
+        "arrow.backward.square",
+        "dpad.right.fill",
+        "tornado",
+        "bandage.fill",
+        "r1.rectangle.roundedbottom",
+        "arrow.uturn.backward",
+        "arrow.turn.right.up",
+        "arrow.uturn.left.square",
+        "square.grid.3x1.folder.fill.badge.plus",
+        "teletype.circle",
+        "increase.indent",
+        "francsign.square.fill",
+        "printer",
+        "34.circle.fill",
+        "person.crop.rectangle.fill",
+        "goforward.15",
+        "sun.min.fill",
+        "39.circle",
+        "simcard.fill",
+        "iphone",
+        "location.north.fill",
+        "hand.thumbsup.fill",
+        "ear.badge.checkmark",
+        "h.circle.fill",
+        "externaldrive.badge.minus",
+        "lt.rectangle.roundedtop",
+        "guaranisign.square.fill",
+        "q.circle.fill",
+        "die.face.1.fill",
+        "1.square",
+        "41.circle",
+        "chevron.right.square",
+        "airpodspro",
+        "location.circle.fill",
+        "person.crop.circle.badge.questionmark",
+        "arrow.triangle.2.circlepath.camera",
+        "42.square.fill",
+        "printer.dotmatrix.fill",
+        "questionmark.folder.fill",
+        "2.square.fill",
+        "cloud.snow",
+        "laptopcomputer.and.iphone",
+        "airpod.right",
+        "bag.circle",
+        "doc.badge.gearshape",
+        "florinsign.square.fill",
+        "giftcard.fill",
+        "airpod.left",
+        "lb.rectangle.roundedbottom",
+        "pianokeys",
+        "arrow.triangle.2.circlepath.doc.on.clipboard",
+        "rhombus.fill",
+        "lock.icloud.fill",
+        "arrow.up.doc",
+        "hifispeaker.and.homepod",
+        "dpad.fill",
+        "bolt.slash.circle",
+        "shippingbox.fill",
+        "delete.right.fill",
+        "folder.badge.minus",
+        "rectangle.fill.on.rectangle.fill",
+        "app.fill",
+        "hands.sparkles",
+        "arrowtriangle.right.and.line.vertical.and.arrowtriangle.left",
+        "video.circle.fill",
+        "doc.on.doc.fill",
+        "doc.text.fill",
+        "xmark.icloud",
+        "s.circle",
+        "paintpalette.fill",
+        "11.square.fill",
+        "octagon.fill",
+        "backward.end.alt",
+        "lungs.fill",
+        "cart.badge.plus",
+        "lock.open.fill",
+        "bag.fill.badge.plus",
+        "location.north",
+        "dongsign.circle",
+        "octagon",
+        "eyeglasses",
+        "manatsign.circle",
+        "equal.square.fill",
+        "larisign.circle.fill",
+        "person.fill.turn.left",
+        "rupeesign.circle",
+        "flag.badge.ellipsis.fill",
+        "shippingbox",
+        "x.square.fill",
+        "8.square",
+        "eye.slash",
+        "bicycle.circle.fill",
+        "coloncurrencysign.circle.fill",
+        "arrow.uturn.right.square",
+        "books.vertical",
+        "hand.tap.fill",
+        "alt",
+        "macpro.gen2",
+        "iphone.radiowaves.left.and.right",
+        "indianrupeesign.circle",
+        "ellipsis.bubble.fill",
+        "cloud.sun.bolt",
+        "32.square.fill",
+        "larisign.square.fill",
+        "dollarsign.circle",
+        "icloud.slash",
+        "aspectratio",
+        "house.circle",
+        "44.square.fill",
+        "zr.rectangle.roundedtop.fill",
+        "tag.circle",
+        "31.circle",
+        "wallet.pass.fill",
+        "arrow.down.backward",
+        "36.square",
+        "forward.end.alt",
+        "flashlight.off.fill",
+        "9.square.fill",
+        "australsign.circle",
+        "arrow.uturn.forward.square.fill",
+        "person.fill",
+        "tugriksign.square",
+        "airport.extreme.tower",
+        "radio",
+        "arrow.up.backward.square.fill",
+        "36.circle",
+        "arrow.up.backward.and.arrow.down.forward.circle.fill",
+        "arrow.counterclockwise.icloud.fill",
+        "minus.circle.fill",
+        "keyboard.chevron.compact.left",
+        "briefcase",
+        "cart.fill",
+        "c.square",
+        "person.crop.rectangle",
+        "44.square",
+        "minus.circle",
+        "w.circle",
+        "bold",
+        "arrow.down.right.square.fill",
+        "questionmark.video.fill",
+        "folder.fill",
+        "camera.fill.badge.ellipsis",
+        "divide.square",
+        "backward.end",
+        "divide.circle.fill",
+        "lock.square",
+        "tray.and.arrow.down",
+        "ipad.landscape",
+        "xmark.circle",
+        "arrowshape.zigzag.right.fill",
+        "bold.underline",
+        "person.2.circle",
+        "pin",
+        "arrow.turn.up.left",
+        "centsign.circle",
+        "deskclock.fill",
+        "48.square",
+        "arrowtriangle.right.fill",
+        "rectangle.roundedbottom.fill",
+        "09.square",
+        "arrow.down.backward.circle",
+        "dial.max",
+        "backward.end.fill",
+        "hifispeaker.and.homepod.fill",
+        "20.circle",
+        "circle.righthalf.fill",
+        "24.circle.fill",
+        "26.square",
+        "camera.filters",
+        "xmark.shield.fill",
+        "envelope",
+        "tv.music.note",
+        "textformat.superscript",
+        "decrease.indent",
+        "wave.3.right",
+        "arrowtriangle.down.fill",
+        "hand.raised",
+        "xmark.circle.fill",
+        "magnifyingglass.circle.fill",
+        "l.square",
+        "equal.square",
+        "kipsign.circle",
+        "applewatch",
+        "hand.draw.fill",
+        "cloud.moon",
+        "seal",
+        "ladybug.fill",
+        "scanner",
+        "tugriksign.square.fill",
+        "arrow.uturn.backward.square",
+        "scroll",
+        "gauge.badge.plus",
+        "ellipsis.bubble",
+        "cloud.heavyrain.fill",
+        "arrow.up.left.and.arrow.down.right.circle",
+        "arrow.uturn.down.square",
+        "paintbrush.pointed.fill",
+        "nose.fill",
+        "person.2",
+        "doc.circle.fill",
+        "cloud.fog.fill",
+        "speaker.wave.2.circle.fill",
+        "briefcase.fill",
+        "arrowshape.turn.up.backward.2.circle.fill",
+        "arrow.right.to.line.alt",
+        "arrowshape.turn.up.left.2.circle",
+        "1.square.fill",
+        "16.square",
+        "23.circle",
+        "arrow.up.square.fill",
+        "tray.circle.fill",
+        "apps.ipad",
+        "command",
+        "arrow.right.circle",
+        "gauge",
+        "gobackward.90",
+        "wind.snow",
+        "0.circle.fill",
+        "14.square.fill",
+        "36.square.fill",
+        "shield",
+        "play.slash",
+        "exclamationmark.bubble",
+        "arrow.triangle.turn.up.right.circle",
+        "l.rectangle.roundedbottom",
+        "lock.square.stack.fill",
+        "lungs",
+        "phone.fill",
+        "minus.square.fill",
+        "arrowtriangle.right.circle",
+        "t.square.fill",
+        "multiply",
+        "capsule.portrait.fill",
+        "ipad.homebutton",
+        "ear.trianglebadge.exclamationmark",
+        "33.circle.fill",
+        "bolt.fill",
+        "20.circle.fill",
+        "arrow.clockwise.icloud.fill",
+        "square.and.pencil",
+        "a.book.closed",
+        "rt.rectangle.roundedtop.fill",
+        "mic.circle",
+        "record.circle.fill",
+        "arrow.down.forward.and.arrow.up.backward",
+        "25.circle",
+        "arrow.forward",
+        "homepod.fill",
+        "keyboard.onehanded.left",
+        "a.circle.fill",
+        "die.face.2",
+        "eurosign.circle",
+        "arrow.up.bin",
+        "folder.badge.person.crop",
+        "envelope.open.fill",
+        "eye.fill",
+        "28.circle.fill",
+        "b.circle",
+        "26.circle.fill",
+        "22.square",
+        "arrowshape.turn.up.right",
+        "cloud.bolt.rain.fill",
+        "45.square",
+        "heart.fill",
+        "clock.fill",
+        "folder.badge.gear",
+        "oval",
+        "arrow.uturn.right.square.fill",
+        "camera.fill",
+        "film.fill",
+        "display.2",
+        "cedisign.circle",
+        "40.square.fill",
+        "plus.bubble.fill",
+        "wrench.and.screwdriver",
+        "tray.full",
+        "centsign.circle.fill",
+        "gearshape.fill",
+        "exclamationmark.shield.fill",
+        "hryvniasign.square.fill",
+        "backward.frame.fill",
+        "pesetasign.circle",
+        "option",
+        "rectangle.portrait",
+        "eyedropper",
+        "video.fill.badge.plus",
+        "capsule.fill",
+        "arrow.triangle.capsulepath",
+        "plus.circle.fill",
+        "arrowtriangle.down",
+        "manatsign.square.fill",
+        "bus.doubledecker.fill",
+        "21.circle",
+        "australsign.square.fill",
+        "cloud.sun.fill",
+        "printer.fill",
+        "percent",
+        "arrowshape.turn.up.left.circle.fill",
+        "oval.portrait",
+        "23.circle.fill",
+        "arrow.up.left.circle",
+        "stethoscope",
+        "d.circle.fill",
+        "lasso",
+        "sun.dust",
+        "eyes.inverse",
+        "phone.arrow.up.right",
+        "tray.and.arrow.up",
+        "tram.tunnel.fill",
+        "person.circle",
+        "wand.and.rays.inverse",
+        "45.circle.fill",
+        "person.crop.square.fill",
+        "ipodshuffle.gen1",
+        "pin.fill",
+        "13.circle.fill",
+        "u.square",
+        "f.circle",
+        "31.square.fill",
+        "17.circle",
+        "arrowtriangle.down.circle",
+        "person.fill.turn.right",
+        "l.rectangle.roundedbottom.fill",
+        "chevron.left.square",
+        "hand.tap",
+        "move.3d",
+        "arrow.left.to.line",
+        "cloud.drizzle",
+        "exclamationmark.circle",
+        "arrowshape.turn.up.right.fill",
+        "hand.point.up.left.fill",
+        "arrowtriangle.up.circle.fill",
+        "arrow.down.left.video",
+        "arrowshape.turn.up.backward.2.fill",
+        "arrow.up.right.square.fill",
+        "person.crop.circle.badge.checkmark",
+        "xmark.shield",
+        "r.joystick.down",
+        "waveform.path.ecg.rectangle.fill",
+        "g.circle.fill",
+        "32.circle.fill",
+        "bookmark.circle",
+        "arrowshape.turn.up.forward.fill",
+        "exclamationmark.icloud",
+        "45.square.fill",
+        "gobackward.15",
+        "o.circle.fill",
+        "p.circle.fill",
+        "esim.fill",
+        "m.square",
+        "arrow.up.forward.circle",
+        "ipodtouch",
+        "v.circle",
+        "text.alignleft",
+        "9.alt.circle.fill",
+        "chevron.up.square.fill",
+        "gift",
+        "shekelsign.square",
+        "hifispeaker.2",
+        "pencil.tip.crop.circle.badge.arrow.forward",
+        "video.fill.badge.checkmark",
+        "millsign.square.fill",
+        "a",
+        "leaf.fill",
+        "phone.arrow.down.left",
+        "folder.badge.plus",
+        "goforward.plus",
+        "plus.square",
+        "hand.raised.slash.fill",
+        "38.square",
+        "28.square",
+        "wallet.pass",
+        "coloncurrencysign.square.fill",
+        "goforward.90",
+        "cart.badge.minus",
+        "arrowtriangle.right.square.fill",
+        "paperplane",
+        "bandage",
+        "xserve",
+        "arrow.up.message.fill",
+        "stop",
+        "chevron.compact.down",
+        "17.square.fill",
+        "arrow.down.forward.and.arrow.up.backward.circle.fill",
+        "lightbulb",
+        "rectangle.portrait.fill",
+        "hands.clap",
+        "plus.circle",
+        "flag.circle",
+        "arrow.right",
+        "esim",
+        "11.circle.fill",
+        "xmark.icloud.fill",
+        "6.alt.square.fill",
+        "08.circle",
+        "location",
+        "video.badge.plus",
+        "shift",
+        "chevron.up.chevron.down",
+        "arrow.uturn.left.circle.badge.ellipsis",
+        "arrow.uturn.forward",
+        "applewatch.radiowaves.left.and.right",
+        "eurosign.square.fill",
+        "arrow.2.squarepath",
+        "flag.slash.circle.fill",
+        "3.circle",
+        "multiply.circle",
+        "forward.end",
+        "arrow.up.right.circle.fill",
+        "d.circle",
+        "ipad.homebutton.landscape",
+        "arrow.uturn.left.circle",
+        "bolt.circle",
+        "externaldrive.badge.plus",
+        "50.square",
+        "tugriksign.circle",
+        "yensign.circle.fill",
+        "scanner.fill",
+        "arrow.backward",
+        "arrow.up.and.person.rectangle.portrait",
+        "calendar",
+        "q.square",
+        "e.circle.fill",
+        "dongsign.square",
+        "arrow.up.right.square",
+        "forward.frame",
+        "arrow.turn.down.right",
+        "desktopcomputer",
+        "app",
+        "arrow.triangle.2.circlepath.circle",
+        "flame.fill",
+        "chevron.down",
+        "bed.double",
+        "25.circle.fill",
+        "guaranisign.square",
+        "binoculars",
+        "hand.point.up",
+        "giftcard",
+        "book.circle",
+        "airpodpro.left",
+        "dongsign.square.fill",
+        "v.circle.fill",
+        "delete.left",
+        "wrench.fill",
+        "zl.rectangle.roundedtop",
+        "chevron.up",
+        "checkmark.icloud",
+        "arrow.down.doc.fill",
+        "l.circle.fill",
+        "square.circle",
+        "arrowshape.bounce.right.fill",
+        "20.square.fill",
+        "eurosign.square",
+        "pin.slash",
+        "bookmark.circle.fill",
+        "video",
+        "guitars",
+        "moon.circle",
+        "die.face.5",
+        "text.book.closed.fill",
+        "person.fill.badge.plus",
+        "triangle",
+        "gobackward.45",
+        "g.square",
+        "l1.rectangle.roundedbottom",
+        "30.square",
+        "arrow.up.backward.square",
+        "arrow.down.backward.square.fill",
+        "keyboard",
+        "r.joystick.fill",
+        "arrow.up.left",
+        "49.square",
+        "text.bubble",
+        "envelope.circle.fill",
+        "hand.point.down.fill",
+        "lock.circle.fill",
+        "house.circle.fill",
+        "escape",
+        "sunset.fill",
+        "slider.horizontal.3",
+        "r.joystick.down.fill",
+        "7.square",
+        "pencil.tip.crop.circle",
+        "4.circle",
+        "23.square",
+        "location.north.line",
+        "staroflife.circle",
+        "7.square.fill",
+        "02.circle.fill",
+        "internaldrive.fill",
+        "arrow.turn.up.forward.iphone",
+        "ipod",
+        "d.square.fill",
+        "lessthan.square.fill",
+        "29.circle",
+        "icloud",
+        "lock.icloud",
+        "tram.circle.fill",
+        "bag.circle.fill",
+        "francsign.circle.fill",
+        "seal.fill",
+        "9.alt.square",
+        "arrow.uturn.backward.square.fill",
+        "arrowshape.turn.up.forward.circle",
+        "number.circle",
+        "arrow.up.and.down.righttriangle.up.fill.righttriangle.down.fill",
+        "speaker.wave.3",
+        "04.square.fill",
+        "hare.fill",
+        "wrench.and.screwdriver.fill",
+        "u.circle.fill",
+        "person.circle.fill",
+        "arrow.turn.right.down",
+        "thermometer.snowflake",
+        "greaterthan",
+        "radio.fill",
+        "die.face.4",
+        "keyboard.onehanded.right",
+        "diamond.fill",
+        "arrow.uturn.forward.circle.fill",
+        "arrow.left.arrow.right.circle",
+        "arrow.up.backward.and.arrow.down.forward",
+        "video.circle",
+        "nairasign.square.fill",
+        "scissors.badge.ellipsis",
+        "leaf.arrow.triangle.circlepath",
+        "number.square.fill",
+        "archivebox.fill",
+        "slider.horizontal.below.rectangle",
+        "doc.on.clipboard",
+        "lock.square.fill",
+        "quote.bubble",
+        "mappin.circle.fill",
+        "headphones.circle",
+        "d.square",
+        "goforward.45",
+        "arrow.down.right.and.arrow.up.left.circle.fill",
+        "play.rectangle.fill",
+        "scribble.variable",
+        "location.slash",
+        "person.crop.circle.badge.minus",
+        "tortoise.fill",
+        "mustache",
+        "bahtsign.circle.fill",
+        "phone.fill.badge.plus",
+        "moon.stars",
+        "timer",
+        "power",
+        "17.circle.fill",
+        "bahtsign.circle",
+        "eye.slash.fill",
+        "text.redaction",
+        "12.circle.fill",
+        "hand.point.up.braille",
+        "bell.badge.fill",
+        "quote.bubble.fill",
+        "a.circle",
+        "plusminus",
+        "27.circle.fill",
+        "eyedropper.full",
+        "bolt.horizontal.icloud.fill",
+        "car.fill",
+        "48.circle",
+        "questionmark.folder",
+        "hexagon",
+        "shield.lefthalf.fill",
+        "die.face.5.fill",
+        "lock.rectangle.stack.fill",
+        "t.bubble",
+        "exclamationmark.square.fill",
+        "30.circle",
+        "speaker.wave.3.fill",
+        "22.square.fill",
+        "bolt.heart",
+        "arrowshape.turn.up.left.2.fill",
+        "00.square",
+        "nairasign.circle.fill",
+        "trash.circle",
+        "l.circle",
+        "heart.circle.fill",
+        "chevron.down.circle.fill",
+        "sdcard.fill",
+        "figure.walk.circle.fill",
+        "l.joystick.fill",
+        "zr.rectangle.roundedtop",
+        "staroflife.fill",
+        "creditcard.fill",
+        "iphone.slash",
+        "arrow.uturn.backward.circle",
+        "bubble.middle.top.fill",
+        "arrow.up.square",
+        "figure.wave.circle",
+        "phone.down.circle",
+        "calendar.badge.exclamationmark",
+        "chevron.compact.right",
+        "cedisign.square",
+        "paperplane.circle.fill",
+        "cloud.moon.bolt.fill",
+        "tortoise",
+        "35.circle",
+        "tuningfork",
+        "hexagon.fill",
+        "newspaper",
+        "scale.3d",
+        "02.circle",
+        "wind",
+        "r.square.fill",
+        "gearshape.2.fill",
+        "arrowshape.turn.up.forward.circle.fill",
+        "chevron.left",
+        "divide",
+        "arrow.down.left.square",
+        "macmini",
+        "forward.end.alt.fill",
+        "dpad.up.fill",
+        "speaker.fill",
+        "macpro.gen3",
+        "person.fill.turn.down",
+        "02.square",
+        "04.circle",
+        "barometer",
+        "38.circle.fill",
+        "arrowtriangle.up.circle",
+        "flag",
+        "arrow.triangle.branch",
+        "50.circle.fill",
+        "arrow.down.forward",
+        "die.face.1",
+        "key.fill",
+        "bolt.car.fill",
+        "tv.fill",
+        "rectangle.roundedbottom",
+        "dpad.down.fill",
+        "arrowtriangle.left.and.line.vertical.and.arrowtriangle.right",
+        "camera.on.rectangle",
+        "arrow.up.arrow.down.circle",
+        "arrow.triangle.2.circlepath.circle.fill",
+        "apps.iphone.landscape",
+        "i.square.fill",
+        "gift.fill",
+        "cedisign.circle.fill",
+        "pause.circle",
+        "yensign.square",
+        "umbrella.fill",
+        "29.square.fill",
+        "33.square.fill",
+        "map.fill",
+        "mic.slash",
+        "diamond",
+        "stop.circle.fill",
+        "bookmark.fill",
+        "42.circle.fill",
+        "08.square.fill",
+        "10.square",
+        "arrow.uturn.right.circle",
+        "candybarphone",
+        "arrow.down.circle",
+        "r.square",
+        "chevron.right.2",
+        "q.circle",
+        "die.face.6",
+        "server.rack",
+        "tv",
+        "person.crop.circle.badge.xmark",
+        "wifi.slash",
+        "die.face.6.fill",
+        "simcard",
+        "textformat.abc",
+        "video.slash",
+        "circle.fill",
+        "paperclip",
+        "arrowshape.turn.up.left.fill",
+        "arrow.up.forward.square",
+        "j.circle",
+        "arrowshape.turn.up.left",
+        "number.square",
+        "doc.text",
+        "phone.bubble.left.fill",
+        "speaker.zzz.fill",
+        "c.circle",
+        "v.square.fill",
+        "arrowtriangle.right.fill.and.line.vertical.and.arrowtriangle.left.fill",
+        "hand.wave",
+        "text.book.closed",
+        "11.square",
+        "lessthan",
+        "bolt.heart.fill",
+        "map",
+        "dial.min.fill",
+        "arrow.up.left.circle.fill",
+        "selection.pin.in.out",
+        "bonjour",
+        "textbox",
+        "bag.fill.badge.minus",
+        "homepod.2.fill",
+        "arrow.up.right",
+        "calendar.badge.plus",
+        "arrow.up.bin.fill",
+        "arrow.up.to.line",
+        "0.square",
+        "rectangle",
+        "icloud.circle",
+        "bus.fill",
+        "waveform.path.ecg.rectangle",
+        "alarm.fill",
+        "3.square.fill",
+        "bolt.slash",
+        "questionmark.circle",
+        "wand.and.stars",
+        "lock.circle",
+        "arrowtriangle.up.square",
+        "playpause",
+        "play.circle",
+        "bookmark.slash",
+        "play",
+        "yensign.square.fill",
+        "hryvniasign.circle",
+        "arrow.right.doc.on.clipboard",
+        "arrow.left.and.right.righttriangle.left.righttriangle.right.fill",
+        "ant",
+        "34.square.fill",
+        "bell.slash",
+        "arrow.up.and.person.rectangle.turn.right",
+        "arrow.clockwise.circle",
+        "rectangle.dashed.badge.record",
+        "4.square.fill",
+        "square",
+        "x.circle",
+        "arrow.forward.square",
+        "01.circle.fill",
+        "mappin.slash",
+        "12.square",
+        "35.square",
+        "mappin",
+        "headphones",
+        "35.circle.fill",
+        "48.square.fill",
+        "repeat.1",
+        "cross.circle",
+        "macpro.gen2.fill",
+        "person.crop.circle.fill",
+        "5.circle",
+        "scroll.fill",
+        "turkishlirasign.circle",
+        "ear",
+        "arrowshape.bounce.forward.fill",
+        "sdcard",
+        "eye.circle",
+        "06.square",
+        "hand.point.left",
+        "lock.doc.fill",
+        "arrowshape.turn.up.left.2",
+        "arrow.left.square",
+        "waveform.circle",
+        "waveform.circle.fill",
+        "arrow.down.right",
+        "moon.stars.fill",
+        "p.square",
+        "00.circle",
+        "face.smiling.fill",
+        "arrow.up.forward",
+        "2.square",
+        "millsign.circle.fill",
+        "arrow.triangle.2.circlepath.camera.fill",
+        "3.square",
+        "teletype",
+        "kipsign.circle.fill",
+        "bahtsign.square.fill",
+        "thermometer.sun",
+        "arrowshape.turn.up.forward",
+        "arrow.down.forward.square",
+        "arrow.counterclockwise.circle.fill",
+        "4.square",
+        "minus",
+        "doc.badge.ellipsis",
+        "arrow.triangle.merge",
+        "arrowtriangle.down.square",
+        "f.circle.fill",
+        "arrow.backward.circle",
+        "arrowshape.turn.up.backward.circle",
+        "4.alt.circle.fill",
+        "phone.fill.arrow.right",
+        "folder.circle",
+        "arrowtriangle.left.square.fill",
+        "6.alt.circle.fill",
+        "airport.express",
+        "0.circle",
+        "person.icloud",
+        "48.circle.fill",
+        "arrow.turn.up.right",
+        "bubble.middle.top",
+        "cloud.fill",
+        "tengesign.circle.fill",
+        "smoke",
+        "arrow.up.and.down.square",
+        "iphone.homebutton",
+        "cloud.hail",
+        "hands.clap.fill",
+        "sum",
+        "cloud.fog",
+        "13.square.fill",
+        "cloud",
+        "6.alt.circle",
+        "yensign.circle",
+        "bell.slash.circle.fill",
+        "circle",
+        "44.circle.fill",
+        "y.circle.fill",
+        "paragraphsign",
+        "nairasign.square",
+        "tv.music.note.fill",
+        "e.square",
+        "pc",
+        "speaker.slash.circle",
+        "note",
+        "questionmark.square.fill",
+        "37.circle",
+        "mic.fill",
+        "arrow.up.and.down.square.fill",
+        "y.circle",
+        "41.square",
+        "dial.min",
+        "pesetasign.circle.fill",
+        "pencil.slash",
+        "figure.wave.circle.fill",
+        "shekelsign.circle.fill",
+        "florinsign.circle",
+        "arrow.up.right.video.fill",
+        "trash.fill",
+        "sterlingsign.circle",
+        "message.circle",
+        "drop.fill",
+        "pesosign.circle",
+        "wonsign.circle.fill",
+        "envelope.badge.fill",
+        "arrow.down.forward.and.arrow.up.backward.circle",
+        "textformat",
+        "10.circle",
+        "13.circle",
+        "arrow.right.square.fill",
+        "backward.frame",
+        "questionmark.circle.fill",
+        "bubble.left.and.bubble.right.fill",
+        "externaldrive.badge.xmark",
+        "arrow.triangle.2.circlepath",
+        "comb.fill",
+        "printer.fill.and.paper.fill",
+        "rotate.left.fill",
+        "5.square",
+        "circle.circle",
+        "t.bubble.fill",
+        "12.circle",
+        "rectangle.dashed.and.paperclip",
+        "person.2.fill",
+        "circle.lefthalf.fill",
+        "banknote",
+        "francsign.square",
+        "tag.slash",
+        "earpods",
+        "bell",
+        "link.icloud",
+        "arrowshape.zigzag.forward.fill",
+        "number.circle.fill",
+        "circle.grid.cross.up.fill",
+        "calendar.circle.fill",
+        "person.badge.minus",
+        "turkishlirasign.square",
+        "arrow.turn.up.forward.iphone.fill",
+        "rectangle.stack.badge.person.crop",
+        "25.square",
+        "multiply.square.fill",
+        "mic.circle.fill",
+        "tengesign.square",
+        "arrow.turn.left.down",
+        "minus.slash.plus",
+        "19.square",
+        "hand.point.right",
+        "flag.badge.ellipsis",
+        "folder.fill.badge.questionmark",
+        "sun.max",
+        "bahtsign.square",
+        "rectangle.on.rectangle",
+        "square.dashed",
+        "arrow.up.left.and.arrow.down.right"
+    ]
     
     struct iconView: View {
 

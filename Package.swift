@@ -13,6 +13,7 @@ let package = Package(
         .library(
             name: "SFSymbolicator",
             targets: ["SFSymbolicator"]),
+        //.executable(name: "symbolicator", targets: ["SFSymbolicator"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -24,6 +25,9 @@ let package = Package(
         .target(
             name: "SFSymbolicator",
             dependencies: []),
+        .target(
+            name: "symbolicator",
+            dependencies: ["SFSymbolicator"]),
         .testTarget(
             name: "SFSymbolicatorTests",
             dependencies: ["SFSymbolicator"]),
